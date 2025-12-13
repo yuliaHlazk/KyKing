@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login page</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header class="header">
+      <h1>Login</h1>
+
+      <div class="nav">
+        <button id="home-btn">Home</button>
+        <button id="register-btn">Register</button>
+      </div>
+    </header>
+
+    <main class="form-main">
+      <div class="form-box">
+        <h2>Log in to your account</h2>
+
+        <form id="login-form">
+          <label>Username</label>
+          <input type="text" id="username" required />
+
+          <label>Password</label>
+          <input type="password" id="password" required />
+
+          <button type="submit" class="primary-btn">Login</button>
+        </form>
+
+        <p id="error-msg" class="error-text"></p>
+      </div>
+    </main>
+
+    <footer>
+      <p>KyKing | 2025 | Yuliia Hlazkova & Nestor Veselyi</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="scripts/login-script.js"></script>
+  </body>
+</html>
