@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Recipe page</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="header">
+  <h1>Recipe Details</h1>
+  <div class="nav">
+    <button id="back-btn">Back</button>
+    <button id="recipes-btn">All Recipes</button>
+    <button id="home-btn">Home</button>
+
+    <span id="username-label"></span>
+    <button id="logout-btn">Logout</button>
+    <button id="login-btn">Login</button>
+  </div>
+</header>
+
+<main>
+
+  <section id="recipe-section">
+    <h2>Recipe Information</h2>
+    <div id="recipe-container">Loading recipe...</div>
+  </section>
+
+  <section id="comments-section">
+    <h2>Comments</h2>
+
+    <div id="comments-container">Loading...</div>
+
+    <div id="comment-form-section" style="display:none;">
+      <textarea id="comment-text" placeholder="Write a comment..."></textarea>
+      <button id="add-comment-btn">Add Comment</button>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>KyKing | 2025 | Yuliia Hlazkova & Nestor Veselyi</p>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="scripts/recipe_detail-script.js"></script>
+
+</body>
+</html>

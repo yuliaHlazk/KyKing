@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Edit recipe</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header class="header">
+      <h1 id="page-title">Create Recipe</h1>
+      <div class="nav">
+        <button id="back-btn">Back</button>
+        <button id="recipes-btn">All Recipes</button>
+        <button id="home-btn">Home</button>
+        <button id="logout-btn">Logout</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="form-section">
+        <form id="recipe-form">
+          <label>Title</label>
+          <input type="text" id="title" required />
+
+          <label>Category</label>
+          <select id="category"></select>
+
+          <label>Difficulty</label>
+          <select id="difficulty">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+
+          <label>Description (short)</label>
+          <textarea id="description" maxlength="300"></textarea>
+
+          <label>Ingredients (comma-separated)</label>
+          <textarea id="ingredients" maxlength="500"></textarea>
+
+          <label>Steps</label>
+          <textarea id="steps" maxlength="500"></textarea>
+
+          <button type="submit" id="save-btn">Save</button>
+          <button type="button" id="delete-btn" style="display: none">
+            Delete
+          </button>
+        </form>
+
+        <p id="status-message"></p>
+      </section>
+    </main>
+
+    <footer>
+      <p>KyKing | 2025 | Yuliia Hlazkova & Nestor Veselyi</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="scripts/edit_recipe-script.js"></script>
+  </body>
+</html>

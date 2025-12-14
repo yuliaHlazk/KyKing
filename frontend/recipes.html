@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Recipes page</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header class="header">
+      <h1>Recipes</h1>
+      <div class="nav">
+        <span id="username-label"></span>
+        <button id="add-recipe-btn">Add Recipe</button>
+        <button id="chefs-btn">Chefs</button>
+        <button id="home-btn">Home</button>
+        <button id="logout-btn">Logout</button>
+        <button id="login-btn">Login</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="container">
+        <h2>All Recipes</h2>
+
+        <div class="filters">
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Search recipes..."
+          />
+
+          <select id="category-filter">
+            <option value="">All categories</option>
+          </select>
+
+          <select id="difficulty-filter">
+            <option value="">All difficulties</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+
+          <select id="verified-filter">
+            <option value="">All recipes</option>
+            <option value="true">Verified only</option>
+            <option value="false">Not verified</option>
+          </select>
+
+          <button id="apply-filters-btn">Apply</button>
+        </div>
+
+        <div
+          id="ai-panel"
+          style="
+            margin: 16px 0;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+          "
+        >
+          <h3 style="margin: 0 0 10px">🤖 AI Tools</h3>
+
+          <div style="display: grid; gap: 12px">
+            <div>
+              <b>Suggest recipes by products</b>
+              <div style="margin-top: 6px">
+                <textarea
+                  id="aiProducts"
+                  rows="2"
+                  style="width: 100%"
+                  placeholder="курка, рис, томат, сир..."
+                ></textarea>
+              </div>
+              <div
+                style="
+                  margin-top: 6px;
+                  display: flex;
+                  gap: 8px;
+                  align-items: center;
+                  flex-wrap: wrap;
+                "
+              >
+                <button id="aiSuggestBtn" type="button">Suggest</button>
+                <label
+                  >Limit:
+                  <input
+                    id="aiSuggestLimit"
+                    type="number"
+                    value="5"
+                    min="1"
+                    max="30"
+                    style="width: 70px"
+                  />
+                </label>
+                <label style="display: flex; gap: 6px; align-items: center">
+                  <input id="aiSuggestVerified" type="checkbox" checked />
+                  verified only
+                </label>
+                <div
+                  id="aiSuggestStatus"
+                  style="font-size: 14px; opacity: 0.85"
+                ></div>
+              </div>
+              <div id="aiSuggestResult" style="margin-top: 8px"></div>
+            </div>
+
+            <hr />
+
+            <div>
+              <b>Weekly plan + shopping list</b>
+              <div style="margin-top: 6px">
+                <textarea
+                  id="aiPantry"
+                  rows="2"
+                  style="width: 100%"
+                  placeholder="що є вдома: гречка, курка, йогурт..."
+                ></textarea>
+              </div>
+              <div
+                style="
+                  margin-top: 6px;
+                  display: flex;
+                  gap: 8px;
+                  align-items: center;
+                  flex-wrap: wrap;
+                "
+              >
+                <label
+                  >Days:
+                  <input
+                    id="aiDays"
+                    type="number"
+                    value="7"
+                    min="1"
+                    max="14"
+                    style="width: 70px"
+                  />
+                </label>
+                <label
+                  >Meals/day:
+                  <input
+                    id="aiMeals"
+                    type="number"
+                    value="2"
+                    min="1"
+                    max="3"
+                    style="width: 70px"
+                  />
+                </label>
+                <label style="display: flex; gap: 6px; align-items: center">
+                  <input id="aiWeekVerified" type="checkbox" checked />
+                  verified only
+                </label>
+                <label style="display: flex; gap: 6px; align-items: center">
+                  <input id="aiWeekUseAi" type="checkbox" />
+                  OpenAI красивий текст
+                </label>
+                <button id="aiWeekBtn" type="button">Generate plan</button>
+                <div
+                  id="aiWeekStatus"
+                  style="font-size: 14px; opacity: 0.85"
+                ></div>
+              </div>
+              <div id="aiWeekResult" style="margin-top: 8px"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="recipes-container">Loading recipes...</div>
+      </section>
+    </main>
+
+    <footer>
+      <p>KyKing | 2025 | Yuliia Hlazkova & Nestor Veselyi</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="scripts/recipes-script.js?v=ai1"></script>
+  </body>
+</html>
