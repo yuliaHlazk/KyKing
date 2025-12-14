@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
+from django.conf import settings
+
 import logging
 
 logger = logging.getLogger(__name__)
@@ -45,23 +48,83 @@ class Recipe(models.Model):
         ordering = ["-created_at"]
 
     def save(self, *args, **kwargs):
+        from users_app.models import UserProfile
 
         is_new = self.pk is None
+        previous_verified = None
+
+        if not is_new:
+            try:
+                previous = Recipe.objects.get(pk=self.pk)
+                previous_verified = previous.verified_by_chef
+            except Recipe.DoesNotExist:
+                previous_verified = None
+
+        if is_new and self.author_id:
+            profile = getattr(self.author, "profile", None)
+            if profile and profile.role in [
+                UserProfile.Role.CHEF,
+                UserProfile.Role.ADMIN,
+            ]:
+                self.verified_by_chef = True
+
         super().save(*args, **kwargs)
+
         if is_new:
             logger.info(
-                "Recipe created: id=%s, title=%s, author=%s",
+                "Recipe created: id=%s, title=%s, author=%s, verified_by_chef=%s",
                 self.pk,
                 self.title,
                 self.author.username,
+                self.verified_by_chef,
             )
         else:
             logger.info(
-                "Recipe updated: id=%s, title=%s, author=%s",
+                "Recipe updated: id=%s, title=%s, author=%s, verified_by_chef=%s",
                 self.pk,
                 self.title,
                 self.author.username,
+                self.verified_by_chef,
             )
+
+        should_notify = (
+            not is_new and previous_verified is False and self.verified_by_chef is True
+        )
+
+        if should_notify and self.author.email:
+            try:
+                frontend_url = getattr(
+                    settings, "FRONTEND_URL", "http://127.0.0.1:9000"
+                )
+                recipe_link = (
+                    f"{frontend_url.rstrip('/')}/recipe_detail.html?recipe={self.pk}"
+                )
+
+                subject = "KyKing about your recipe"
+                message = (
+                    f"Hello, {self.author.username}!\n"
+                    f"Your recipe «{self.title}» was approved by chef✅\n"
+                    f"See your recipe: {recipe_link}\n"
+                    "With love, KyKing!"
+                )
+
+                send_mail(
+                    subject,
+                    message,
+                    getattr(settings, "DEFAULT_FROM_EMAIL", "no-reply@kyking.local"),
+                    [self.author.email],
+                    fail_silently=True,
+                )
+
+                logger.info(
+                    "Approval email sent to user=%s for recipe id=%s",
+                    self.author.username,
+                    self.pk,
+                )
+            except Exception:
+                logger.exception(
+                    "Failed to send approval email for recipe id=%s", self.pk
+                )
 
 
 class Comment(models.Model):
@@ -97,7 +160,13 @@ class Comment(models.Model):
                 self.is_chef_comment,
             )
         else:
-            logger.info("Comment updated id=%s", self.pk)
+            logger.info(
+                "Comment updated id=%s on recipe=%s by user %s (chef=%s)",
+                self.pk,
+                self.recipe_id,
+                self.author.username,
+                self.is_chef_comment,
+            )
 
 
 class Favorite(models.Model):
@@ -108,7 +177,7 @@ class Favorite(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.user.username} - {self.recipe.title}"
+        return f"Favorite {self.user.username} - {self.recipe.title}"
 
     class Meta:
         constraints = [

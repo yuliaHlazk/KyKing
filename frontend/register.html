@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Registrstion page</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header class="header">
+      <h1>Registration</h1>
+
+      <div class="nav">
+        <button id="home-btn">Home</button>
+        <button id="login-btn">Login</button>
+      </div>
+    </header>
+
+    <main class="form-main">
+      <div class="form-box">
+        <h2>Create your account</h2>
+
+        <form id="register-form">
+          <label>Username</label>
+          <input type="text" id="username" required />
+
+          <label>Email</label>
+          <input type="email" id="email" required />
+
+          <label>Password</label>
+          <input type="password" id="password" required />
+
+          <label>First name</label>
+          <input type="text" id="first_name" required />
+
+          <label>Last name</label>
+          <input type="text" id="last_name" required />
+
+          <label>Role</label>
+          <select id="role" required>
+            <option value="USER" selected>User</option>
+            <option value="CHEF">Chef</option>
+          </select>
+
+          <button type="submit" class="primary-btn">Register</button>
+        </form>
+
+        <p id="error-msg" class="error-text"></p>
+      </div>
+    </main>
+
+    <footer>
+      <p>KyKing | 2025 | Yuliia Hlazkova & Nestor Veselyi</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="scripts/register-script.js"></script>
+  </body>
+</html>

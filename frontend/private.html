@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Private page</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header class="header">
+      <h1>Profile</h1>
+
+      <div class="nav">
+        <button id="home-btn">Home</button>
+        <button id="recipes-btn">Recipes</button>
+        <button id="favorites-btn">Favorites</button>
+        <button id="chefs-btn">Chefs</button>
+        <button id="logout-btn">Logout</button>
+      </div>
+    </header>
+
+    <main class="profile-main">
+      <div class="profile-box">
+        <div class="avatar-section">
+          <img
+            id="avatar-img"
+            class="avatar-img"
+            src=""
+            alt="Profile picture"
+          />
+        </div>
+
+        <h2 id="username"></h2>
+
+        <p><b>Full name:</b> <span id="full-name"></span></p>
+        <p><b>Email:</b> <span id="email"></span></p>
+
+        <p>
+          <b>Role:</b>
+          <span id="role"></span>
+          <span id="chef-badge" class="chef-badge" style="display: none"
+            >Chef</span
+          >
+        </p>
+
+        <p><b>Bio:</b></p>
+        <p id="bio"></p>
+
+        <div class="profile-buttons">
+          <button id="edit-btn">Edit Profile</button>
+          <button id="to-favorites-btn">My Favorites</button>
+          <button id="to-recipes-btn">All Recipes</button>
+          <button id="to-chefs-btn">Chefs</button>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>KyKing | 2025 | Yuliia Hlazkova & Nestor Veselyi</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="scripts/private-script.js"></script>
+  </body>
+</html>
