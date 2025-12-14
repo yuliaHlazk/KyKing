@@ -14,7 +14,6 @@ class ScaleIngredientsRequestSerializer(serializers.Serializer):
 
 
 class SuggestRecipesRequestSerializer(serializers.Serializer):
-    # можна передати або list, або строку "курка, рис, томат"
     products = serializers.ListField(
         child=serializers.CharField(), required=False
     )
